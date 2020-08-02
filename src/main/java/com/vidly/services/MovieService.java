@@ -2,6 +2,7 @@ package com.vidly.services;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -48,16 +49,16 @@ public class MovieService {
 	}
 	
 	//delete movie
-	public ResponseEntity.BodyBuilder deleteMovie(Long id) {
-		if(id == null) return ResponseEntity.badRequest();
+	public ResponseEntity<Object> deleteMovie(Long id) {
+		if(id == null) throw new MovieException("Movie object can not be null");
 		
 		try {
 			repository.deleteById(id);
 		}catch (Exception e) {
-			return ResponseEntity.badRequest();
+			throw new MovieException("Movie has already been deleted.");
 		}
 		
-		return ResponseEntity.ok();
+		return new ResponseEntity<Object>(HttpStatus.OK);
 		
 	}
 
