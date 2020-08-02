@@ -47,7 +47,7 @@ public class MovieController {
 
 	@CrossOrigin
 	@DeleteMapping("/{id}")
-	public ResponseEntity.BodyBuilder deleteMovie(@PathVariable Long id){
+	public ResponseEntity<Object> deleteMovie(@PathVariable Long id){
 		return service.deleteMovie(id);
 	}
 	
