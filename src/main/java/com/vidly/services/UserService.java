@@ -1,10 +1,12 @@
 package com.vidly.services;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vidly.exceptions.UserExistsException;
 import com.vidly.models.User;
 import com.vidly.repositories.UserRepository;
 
@@ -21,15 +23,13 @@ public class UserService {
 	//get user
 	
 	//register user
+	@CrossOrigin
 	@PostMapping
 	public User registerUser(@RequestBody User newUser ) {
-		return repository
-				.findById(newUser.getId()).map(user -> {
-					user.setName(newUser.getName());
-					user.setEmail(newUser.getEmail());
-					return user;
-				})
-				.orElse(repository.save(newUser));
+		if(repository.findByEmail(newUser.getEmail()).isPresent()) {
+			throw new UserExistsException("Email already used.");
+		}
+		return repository.save(newUser);
 	}
 	
 	//delete user
