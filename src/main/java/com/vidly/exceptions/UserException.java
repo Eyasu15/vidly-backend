@@ -1,13 +1,13 @@
 package com.vidly.exceptions;
 
-public class UserExistsException extends RuntimeException {
+public class UserException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public UserExistsException(String message) {
+	public UserException(String message) {
 		super(message);
 	}
 }
