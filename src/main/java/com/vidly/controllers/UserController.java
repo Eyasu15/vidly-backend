@@ -28,8 +28,9 @@ public class UserController {
 	}
 	
 	@CrossOrigin
-	@DeleteMapping
+	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
 		return service.deleteUser(id);
 	}
+	
 }
