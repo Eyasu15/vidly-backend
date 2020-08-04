@@ -21,6 +21,7 @@ public class UserController {
 	public UserController(UserService service) {
 		this.service = service;
 	}
+	
 	@CrossOrigin
 	@PostMapping
 	public User register(@RequestBody User user) {
