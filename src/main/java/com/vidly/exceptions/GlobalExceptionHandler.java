@@ -41,4 +41,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		return new ResponseEntity<Object>(error, BAD_REQUEST);
 	}
+	
 }
