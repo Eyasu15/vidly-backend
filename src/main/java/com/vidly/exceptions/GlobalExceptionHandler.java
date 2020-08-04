@@ -33,5 +33,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ErrorDetails error = new ErrorDetails(LocalDate.now(),ex.getMessage(), request.getDescription(false));
 		
 		return new ResponseEntity<Object>(error, BAD_REQUEST);
-	}	
+	}
+	
+	@ExceptionHandler(CustomerException.class)
+	public final ResponseEntity<Object> handleCustomerException(Exception ex, WebRequest request){
+		ErrorDetails error = new ErrorDetails(LocalDate.now(),ex.getMessage(), request.getDescription(false));
+		
+		return new ResponseEntity<Object>(error, BAD_REQUEST);
+	}
 }
