@@ -1,4 +1,4 @@
-package com.vidly.services;
+package com.vidly.exceptions;
 
 public class CustomerException extends RuntimeException {
 

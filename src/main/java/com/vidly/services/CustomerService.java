@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.vidly.exceptions.CustomerException;
 import com.vidly.models.Customer;
 import com.vidly.repositories.CustomerRepository;
 
