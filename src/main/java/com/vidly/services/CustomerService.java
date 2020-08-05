@@ -19,8 +19,14 @@ public class CustomerService {
 
 	public Customer getCustomer(Long id) {
 		Optional<Customer> result = repository.findById(id);
+		
 		if(result.isPresent()) return result.get();
 		throw new CustomerException("Customer not found.");
 	}
 	
+	public Customer addCustomer(Customer newCustomer) {
+		 if(repository.findById(newCustomer.getId()).isPresent()){
+			 throw new CustomerException("Customer already exists");
+		 }
+	}
 }
