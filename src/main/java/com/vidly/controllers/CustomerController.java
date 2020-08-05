@@ -1,5 +1,7 @@
 package com.vidly.controllers;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,5 +30,10 @@ public class CustomerController {
 	@PostMapping()
 	public Customer addCustomer(@RequestBody Customer newCustomer) {
 		return service.addCustomer(newCustomer);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Object> deleteCustomer(@PathVariable Long id) {
+		return service.deleteCustomer(id);
 	}
 }
