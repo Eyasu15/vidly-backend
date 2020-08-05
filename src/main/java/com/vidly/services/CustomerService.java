@@ -28,5 +28,7 @@ public class CustomerService {
 		 if(repository.findById(newCustomer.getId()).isPresent()){
 			 throw new CustomerException("Customer already exists");
 		 }
+		 
+		 return repository.save(newCustomer);
 	}
 }
