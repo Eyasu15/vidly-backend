@@ -2,6 +2,7 @@ package com.vidly.services;
 
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.vidly.exceptions.CustomerException;
@@ -30,5 +31,15 @@ public class CustomerService {
 		 }
 		 
 		 return repository.save(newCustomer);
+	}
+	
+	public ResponseEntity<Object> deleteCustomer(Long id){
+		try {
+			repository.deleteById(id);
+		} catch (Exception e) {
+			throw new CustomerException("Customer doesn't exists");
+		}
+		
+		
 	}
 }
