@@ -2,6 +2,7 @@ package com.vidly.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vidly.exceptions.UserException;
 import com.vidly.models.AuthRequest;
 import com.vidly.models.User;
 import com.vidly.services.UserService;
@@ -43,7 +45,15 @@ public class UserController {
 	
 	@PostMapping("/authenticate")
 	public String generateToken(@RequestBody AuthRequest authRequest) {
+		try {
+			authManager.authenticate(
+				new UsernamePasswordAuthenticationToken(
+						authRequest.getUserName(), authRequest.getPassword()));
+		} catch (Exception ex) {
+			throw new UserException("Invalid username/password");
+		}
 		
+		return jwtUtil.generateToken(authRequest.getUserName());
 	}
 	
 }
