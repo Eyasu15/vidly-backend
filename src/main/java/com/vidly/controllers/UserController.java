@@ -48,12 +48,12 @@ public class UserController {
 		try {
 			authManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
-						authRequest.getUserName(), authRequest.getPassword()));
+						authRequest.getEmail(), authRequest.getPassword()));
 		} catch (Exception ex) {
 			throw new UserException("Invalid username/password");
 		}
 		
-		return jwtUtil.generateToken(authRequest.getUserName());
+		return jwtUtil.generateToken(authRequest.getEmail());
 	}
 	
 }

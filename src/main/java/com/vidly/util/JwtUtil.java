@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.cglib.core.internal.Function;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
+@Service
 public class JwtUtil {
 	
     private String secret = "javatechie";
