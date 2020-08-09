@@ -19,6 +19,7 @@ import com.vidly.util.JwtUtil;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin
 public class UserController {
 
 	private final UserService service;
@@ -31,14 +32,13 @@ public class UserController {
 		this.authManager = authManager;
 	}
 	
-	@CrossOrigin
+	
 	@PostMapping
 	public User register(@RequestBody User user) {
 		return service.registerUser(user);
 	}
 	
 	
-	@CrossOrigin
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
 		return service.deleteUser(id);
