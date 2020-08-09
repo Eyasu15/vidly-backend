@@ -33,7 +33,7 @@ public class UserController {
 	}
 	
 	
-	@PostMapping
+	@PostMapping("/register")
 	public User register(@RequestBody User user) {
 		return service.registerUser(user);
 	}
