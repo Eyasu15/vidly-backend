@@ -20,8 +20,8 @@ import com.vidly.util.JwtUtil;
 @Component
 public class JwtFilter extends OncePerRequestFilter{
 
-	private final JwtUtil jwtUtil;
-	private final CustomUserDetailsService service;
+	private  JwtUtil jwtUtil;
+	private  CustomUserDetailsService service;
 	
 	public JwtFilter(JwtUtil jwtUtil, CustomUserDetailsService service) {
 		this.jwtUtil = jwtUtil;
