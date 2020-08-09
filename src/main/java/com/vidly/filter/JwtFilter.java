@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,13 +21,11 @@ import com.vidly.util.JwtUtil;
 @Component
 public class JwtFilter extends OncePerRequestFilter{
 
+	@Autowired
 	private  JwtUtil jwtUtil;
+	@Autowired
 	private  CustomUserDetailsService service;
 	
-	public JwtFilter(JwtUtil jwtUtil, CustomUserDetailsService service) {
-		this.jwtUtil = jwtUtil;
-		this.service = service;
-	}
 	
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
