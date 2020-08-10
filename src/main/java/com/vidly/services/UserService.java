@@ -32,6 +32,8 @@ public class UserService {
 		if(repository.findByEmail(newUser.getEmail()).isPresent()) {
 			throw new UserException("Email already used.");
 		}
+		newUser.setPassword(encoder.encode(newUser.getPassword()));
+		
 		return repository.save(newUser);
 	}
 	
