@@ -2,18 +2,29 @@ package com.vidly.services;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vidly.exceptions.UserException;
+import com.vidly.models.AuthRequest;
 import com.vidly.models.User;
 import com.vidly.repositories.UserRepository;
+import com.vidly.util.JwtUtil;
 
 @Service
 public class UserService {
 
 	private final UserRepository repository;
+	private final JwtUtil jwtUtil;
+	private final AuthenticationManager authManager;
+	private BCryptPasswordEncoder encoder;
 	
-	public UserService(UserRepository repository) {
+	public UserService(UserRepository repository, JwtUtil jwtUtil, AuthenticationManager authManager, BCryptPasswordEncoder encoder) {
+		this.jwtUtil = jwtUtil;
+		this.authManager = authManager;
+		this.encoder = encoder;
 		this.repository = repository;
 	}
 	
@@ -32,5 +43,17 @@ public class UserService {
 		}
 		
 		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+	
+	public String generateToken(AuthRequest authRequest) {
+		try {
+			authManager.authenticate(
+				new UsernamePasswordAuthenticationToken(
+						authRequest.getEmail(), authRequest.getPassword()));
+		} catch (Exception ex) {
+			throw new UserException("Invalid username/password");
+		}
+		
+		return jwtUtil.generateToken(authRequest.getEmail());
 	}
 }
