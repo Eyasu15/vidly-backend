@@ -24,7 +24,6 @@ public class UserController {
 		this.service = service;
 	}
 	
-	@CrossOrigin
 	@PostMapping("/register")
 	public User register(@RequestBody User user) {
 		return service.registerUser(user);
@@ -36,8 +35,8 @@ public class UserController {
 		return service.deleteUser(id);
 	}
 	
-	@PostMapping("/authenticate")
-	public String generateToken(@RequestBody AuthRequest authRequest) {
+	@PostMapping("/login")
+	public String login(@RequestBody AuthRequest authRequest) {
 		return service.generateToken(authRequest);
 	}
 	
