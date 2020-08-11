@@ -17,7 +17,6 @@ import com.vidly.services.MovieService;
 
 @RestController
 @RequestMapping("/movies")
-@CrossOrigin
 public class MovieController {
 
 	private final MovieService service;
@@ -30,7 +29,7 @@ public class MovieController {
 	public Movie getMovie(@PathVariable Long id) {
 		return service.getOne(id);
 	}
-
+	@CrossOrigin
 	@GetMapping()
 	public List<Movie> getAllMovies() {
 		return service.getAll();
