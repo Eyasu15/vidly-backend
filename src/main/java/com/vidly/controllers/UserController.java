@@ -15,7 +15,7 @@ import com.vidly.services.UserService;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin(origins = "localhost:3000")
+@CrossOrigin
 public class UserController {
 
 	private final UserService service;
