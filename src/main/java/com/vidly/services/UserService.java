@@ -56,7 +56,9 @@ public class UserService {
 			throw new UserException("Invalid username/password");
 		}
 		
-		return jwtUtil.generateToken(authRequest.getEmail());
+		User user = repository.findByEmail(authRequest.getEmail()).get();
+		
+		return jwtUtil.generateToken(use);
 	}
 	
 }

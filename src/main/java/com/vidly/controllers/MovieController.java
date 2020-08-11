@@ -26,21 +26,25 @@ public class MovieController {
 		this.service = service;
 	}
 	
+	@CrossOrigin	
 	@GetMapping("/{id}")
 	public Movie getMovie(@PathVariable Long id) {
 		return service.getOne(id);
 	}
-
+	
+	@CrossOrigin
 	@GetMapping()
 	public List<Movie> getAllMovies(){
 		return service.getAll();
 	}
 
+	@CrossOrigin
 	@PostMapping()
 	public Movie addMovie(@RequestBody Movie movie){
 		return service.addMovie(movie);
 	}
 
+	@CrossOrigin
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Object> deleteMovie(@PathVariable Long id){
 		return service.deleteMovie(id);
