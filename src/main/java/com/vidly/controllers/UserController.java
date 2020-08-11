@@ -15,7 +15,7 @@ import com.vidly.services.UserService;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin
+@CrossOrigin(origins = "localhost:3000")
 public class UserController {
 
 	private final UserService service;
@@ -34,6 +34,7 @@ public class UserController {
 	public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
 		return service.deleteUser(id);
 	}
+	
 	
 	@PostMapping("/login")
 	public String login(@RequestBody AuthRequest authRequest) {

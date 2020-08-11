@@ -58,7 +58,7 @@ public class UserService {
 		
 		User user = repository.findByEmail(authRequest.getEmail()).get();
 		
-		return jwtUtil.generateToken(use);
+		return jwtUtil.generateToken(user);
 	}
 	
 }
