@@ -19,17 +19,14 @@ public class MovieService {
 		this.repository = repository;
 	}
 	
-	//get one movie
 	public Movie getOne(Long id) {
 		return repository.findById(id).get();
 	}
 	
-	//get all movies
 	public List<Movie> getAll() {
 		return repository.findAll();
 	}
 	
-	//post movie
 	public Movie addMovie( Movie movie) {
 		if(movie == null) throw new MovieException("Movie object can not be null");
 		
@@ -48,7 +45,6 @@ public class MovieService {
 		return repository.save(movie);	
 	}
 	
-	//delete movie
 	public ResponseEntity<Object> deleteMovie(Long id) {
 		if(id == null) throw new MovieException("Movie object can not be null");
 		

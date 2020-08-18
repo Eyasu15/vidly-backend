@@ -1,5 +1,6 @@
 package com.vidly.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,10 @@ public class CustomerService {
 	
 	public CustomerService(CustomerRepository repository) {
 		this.repository = repository;
+	}
+	
+	public List<Customer> getAllCustomers(){
+		return repository.findAll();
 	}
 
 	public Customer getCustomer(Long id) {
