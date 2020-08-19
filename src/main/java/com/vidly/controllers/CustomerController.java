@@ -1,6 +1,9 @@
 package com.vidly.controllers;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +16,8 @@ import com.vidly.models.Customer;
 import com.vidly.services.CustomerService;
 
 @RestController
-@RequestMapping("/customer")
+@RequestMapping("/customers")
+@CrossOrigin
 public class CustomerController {
 
 	private final CustomerService service;
@@ -25,6 +29,11 @@ public class CustomerController {
 	@GetMapping("/{id}")
 	public Customer getCustomer(@PathVariable Long id) {
 		return service.getCustomer(id);
+	}
+	
+	@GetMapping()
+	public List<Customer> getAllCustomers() {
+		return service.getAllCustomers();
 	}
 	
 	@PostMapping()

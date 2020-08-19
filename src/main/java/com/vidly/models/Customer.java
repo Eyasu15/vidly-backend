@@ -16,12 +16,10 @@ public class Customer {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Min(5) @Max(50)
 	private String name;
 	
 	private Boolean isGold;
 
-	@Min(5) @Max(50)
 	private String phone;
 	
 }
