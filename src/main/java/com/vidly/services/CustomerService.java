@@ -25,10 +25,7 @@ public class CustomerService {
 	}
 
 	public Customer getCustomer(Long id) {
-		Optional<Customer> result = repository.findById(id);
-		
-		if(result.isPresent()) return result.get();
-		throw new CustomerException("Customer not found.");
+		return repository.findById(id).orElseThrow(() -> new CustomerException("Customer not found."));
 	}
 	
 	public Customer addCustomer(Customer newCustomer) {
