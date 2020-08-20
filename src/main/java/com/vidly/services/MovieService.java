@@ -20,7 +20,7 @@ public class MovieService {
 	}
 	
 	public Movie getOne(Long id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElseThrow(()-> new MovieException("Movies doesn't exist."));
 	}
 	
 	public List<Movie> getAll() {
