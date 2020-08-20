@@ -25,15 +25,15 @@ public class CustomerService {
 	}
 
 	public Customer getCustomer(Long id) {
-		return repository.findById(id).orElseThrow(() -> new CustomerException("Customer not found."));
+		return repository
+				.findById(id)
+				.orElseThrow(() -> new CustomerException("Customer not found."));
 	}
 	
 	public Customer addCustomer(Customer newCustomer) {
-		 if(repository.findById(newCustomer.getId()).isPresent()){
-			 throw new CustomerException("Customer already exists");
-		 }
-		 
-		 return repository.save(newCustomer);
+		if(newCustomer == null) throw new CustomerException("Customer can't be null");
+		
+		return repository.save(newCustomer);
 	}
 	
 	public ResponseEntity<Object> deleteCustomer(Long id){
