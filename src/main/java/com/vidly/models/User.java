@@ -22,5 +22,6 @@ public class User {
 	private String email;
 	@NotBlank
 	private String password;
-	private Boolean isAdmin;
+	private String role="ROLE_USER";
+	
 }
