@@ -1,30 +1,24 @@
 package com.vidly.models;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
-public class Customer {
+public class Review {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String name;
-	private Boolean isGold;
-	private String phone;
+	private Integer rate;
+	private String headline;
+	private String description;
 	
-	@OneToMany
-	private List<Movie> moviesRented;
-
-	@OneToMany(mappedBy = "customer")
-	private List<Review> reviews;
-
+	@ManyToOne
+	private Customer customer;
 }
