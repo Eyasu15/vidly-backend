@@ -25,11 +25,13 @@ public class Rental {
 	private Movie movie;
 	private LocalDate dateOut;
 	private LocalDate dateReturned;
+	private Boolean isReturned=false;
 	private Double rentalFee;
 	
 	public void returnMovie() {
 		dateReturned = LocalDate.now();
 		int rentalDays = dateReturned.getDayOfYear() - dateOut.getDayOfYear();
 		rentalFee = Double.valueOf(rentalDays * movie.getDailyRentalRate());
+		isReturned = true;
 	}
 }

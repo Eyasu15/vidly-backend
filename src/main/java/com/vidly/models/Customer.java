@@ -22,7 +22,7 @@ public class Customer {
 	private String phone;
 	
 	@OneToMany
-	private List<Movie> moviesRented;
+	private List<Rental> moviesRented;
 
 	@OneToMany(mappedBy = "customer")
 	private List<Review> reviews;
