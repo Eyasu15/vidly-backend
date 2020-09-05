@@ -44,9 +44,9 @@ public class RentalController {
 		return service.rentMovie(rental, movieId, customerId);
 	}
 	
-	@PutMapping
-	public Rental returnMovie(@RequestBody Rental rental) {
-		return service.returnMovie(rental);
+	@PutMapping("/{id}")
+	public Rental returnMovie(@PathVariable Long id) {
+		return service.returnMovie(id);
 	}
 	
 	@DeleteMapping("/{id}")

@@ -39,23 +39,20 @@ public class RentalService {
 		
 		rental.setCustomer(customer);
 		rental.setMovie(movie);
+		rental.setCustomerName(customer.getName());
+		rental.setMovieTitle(movie.getTitle());
 		rental.setStatus(Status.RENTED);
 		
 		return repository.save(rental);
 	}
 
-	public Rental returnMovie(Rental rental) {
+	public Rental returnMovie(Long id) {
+		
+		Rental rental = repository.findById(id).get();
 		rental.returnMovie();
+			
 		
-		Rental returnedRental = repository.findById(rental.getId())
-			.map(r -> {
-				r.setDateReturned(rental.getDateReturned());
-				r.setStatus(rental.getStatus());
-				r.setRentalFee(rental.getRentalFee());
-				return r;
-			}).orElse(repository.save(rental));
-		
-		return repository.save(returnedRental);
+		return repository.save(rental);
 	}
 
 	public List<Rental> getAllRentals() {

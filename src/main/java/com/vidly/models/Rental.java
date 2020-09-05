@@ -26,12 +26,15 @@ public class Rental {
 	@JsonIgnore
 	private Customer customer;
 	
+	private String customerName;
+	private String movieTitle;
 	
 	@OneToOne
 	@JsonIgnore
 	private Movie movie;
 	private LocalDate dateOut;
 	private LocalDate dateReturned;
+	private Boolean isPaid = false;
 	
 	@Enumerated(EnumType.STRING)
 	private Status status;
@@ -42,5 +45,6 @@ public class Rental {
 		int rentalDays = dateReturned.getDayOfYear() - dateOut.getDayOfYear();
 		rentalFee = Double.valueOf(rentalDays * movie.getDailyRentalRate());
 		status = Status.RETURNED;
+		isPaid = true;
 	}
 }
