@@ -8,30 +8,49 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.vidly.models.Customer;
+import com.vidly.models.Movie;
 import com.vidly.models.Rental;
+import com.vidly.models.Status;
+import com.vidly.repositories.CustomerRepository;
+import com.vidly.repositories.MovieRepository;
 import com.vidly.repositories.RentalRepository;
 
 @Service
 public class RentalService {
 
 	private final RentalRepository repository;
+	private final MovieRepository movieRepository;
+	private final CustomerRepository customerRepository;
 
-	public RentalService(RentalRepository repository) {
+	
+
+	public RentalService(RentalRepository repository, MovieRepository movieRepository,
+			CustomerRepository customerRepository) {
 		super();
 		this.repository = repository;
+		this.movieRepository = movieRepository;
+		this.customerRepository = customerRepository;
 	}
-	
-	public Rental rentMovie(Rental rental) {
+
+	public Rental rentMovie(Rental rental, Long movieId, Long customerId) {
+		Customer customer = customerRepository.findById(customerId).get();
+		Movie movie = movieRepository.findById(movieId).get();
+		
+		rental.setCustomer(customer);
+		rental.setMovie(movie);
+		rental.setStatus(Status.RENTED);
+		
 		return repository.save(rental);
 	}
 
-	public Rental returnMovie(Rental rental, Long id) {
+	public Rental returnMovie(Rental rental) {
 		rental.returnMovie();
 		
-		Rental returnedRental = repository.findById(id)
+		Rental returnedRental = repository.findById(rental.getId())
 			.map(r -> {
 				r.setDateReturned(rental.getDateReturned());
-				r.setIsReturned(rental.getIsReturned());
+				r.setStatus(rental.getStatus());
 				r.setRentalFee(rental.getRentalFee());
 				return r;
 			}).orElse(repository.save(rental));
