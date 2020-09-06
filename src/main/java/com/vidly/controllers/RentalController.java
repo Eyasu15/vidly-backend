@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.vidly.models.EntityDTO;
 import com.vidly.models.Rental;
 import com.vidly.services.RentalService;
 
@@ -37,6 +38,11 @@ public class RentalController {
 	@GetMapping
 	public List<Rental> getAll(){
 		return service.getAllRentals();
+	}
+	
+	@GetMapping("/moviesDTO")
+	public List<EntityDTO> getMoviesDTO() {
+		return service.getMoviesDTO();
 	}
 	
 	@PostMapping()

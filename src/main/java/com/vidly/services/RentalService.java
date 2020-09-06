@@ -1,6 +1,7 @@
 package com.vidly.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.vidly.models.Customer;
+import com.vidly.models.EntityDTO;
 import com.vidly.models.Movie;
 import com.vidly.models.Rental;
 import com.vidly.models.Status;
@@ -61,6 +63,16 @@ public class RentalService {
 
 	public Rental getOneRental(Long id) {
 		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Rental doesn't exist"));
+	}
+	
+	public List<EntityDTO> getMoviesDTO(){
+		List<Movie> movies = movieRepository.findAll();
+		return movies.stream().map(m-> {
+			EntityDTO movieDTO = new EntityDTO();
+			movieDTO.setName(m.getTitle());
+			movieDTO.setId(m.getId());
+			return movieDTO;
+		}).collect(Collectors.toList());
 	}
 
 	public ResponseEntity<Object> deleteRental(Long id) {
