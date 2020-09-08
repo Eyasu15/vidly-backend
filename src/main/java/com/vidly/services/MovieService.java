@@ -9,17 +9,21 @@ import org.springframework.stereotype.Service;
 import com.vidly.exceptions.MovieException;
 import com.vidly.models.Movie;
 import com.vidly.models.MovieBlobs;
+import com.vidly.repositories.MovieBlobsRepository;
 import com.vidly.repositories.MovieRepository;
 
 @Service
 public class MovieService {
 
 	private final MovieRepository repository;
+	private final MovieBlobsRepository blobRepository;
 	
-	public MovieService(MovieRepository repository) {
+	public MovieService(MovieRepository repository, MovieBlobsRepository blobRepository) {
+		super();
 		this.repository = repository;
+		this.blobRepository = blobRepository;
 	}
-	
+
 	public Movie getOne(Long id) {
 		return repository.findById(id).orElseThrow(()-> new MovieException("Movies doesn't exist."));
 	}
@@ -46,7 +50,7 @@ public class MovieService {
 		return repository.save(movie);	
 	}
 	
-	public MovieBlobs addMovieCover() {
+	public MovieBlobs addMovieCover(byte[] cover) {
 		
 	}
 	
