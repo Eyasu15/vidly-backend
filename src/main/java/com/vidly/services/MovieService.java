@@ -50,8 +50,8 @@ public class MovieService {
 		return repository.save(movie);	
 	}
 	
-	public MovieBlobs addMovieCover(byte[] cover) {
-		
+	public MovieBlobs addMovieCover(MovieBlobs cover) {
+		return blobRepository.save(cover);
 	}
 	
 	public ResponseEntity<Object> deleteMovie(Long id) {
