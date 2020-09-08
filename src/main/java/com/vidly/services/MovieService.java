@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.vidly.exceptions.MovieException;
 import com.vidly.models.Movie;
+import com.vidly.models.MovieBlobs;
 import com.vidly.repositories.MovieRepository;
 
 @Service
@@ -43,6 +44,10 @@ public class MovieService {
 		}
 		
 		return repository.save(movie);	
+	}
+	
+	public MovieBlobs addMovieCover() {
+		
 	}
 	
 	public ResponseEntity<Object> deleteMovie(Long id) {
