@@ -25,8 +25,6 @@ public class RentalService {
 	private final MovieRepository movieRepository;
 	private final CustomerRepository customerRepository;
 
-	
-
 	public RentalService(RentalRepository repository, MovieRepository movieRepository,
 			CustomerRepository customerRepository) {
 		super();
@@ -38,22 +36,21 @@ public class RentalService {
 	public Rental rentMovie(Rental rental, Long movieId, Long customerId) {
 		Customer customer = customerRepository.findById(customerId).get();
 		Movie movie = movieRepository.findById(movieId).get();
-		
+
 		rental.setCustomer(customer);
 		rental.setMovie(movie);
 		rental.setCustomerName(customer.getName());
 		rental.setMovieTitle(movie.getTitle());
 		rental.setStatus(Status.RENTED);
-		
+
 		return repository.save(rental);
 	}
 
 	public Rental returnMovie(Long id) {
-		
+
 		Rental rental = repository.findById(id).get();
 		rental.returnMovie();
-			
-		
+
 		return repository.save(rental);
 	}
 
@@ -64,10 +61,10 @@ public class RentalService {
 	public Rental getOneRental(Long id) {
 		return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Rental doesn't exist"));
 	}
-	
-	public List<EntityDTO> getMoviesDTO(){
+
+	public List<EntityDTO> getMoviesDTO() {
 		List<Movie> movies = movieRepository.findAll();
-		return movies.stream().map(m-> {
+		return movies.stream().map(m -> {
 			EntityDTO movieDTO = new EntityDTO();
 			movieDTO.setName(m.getTitle());
 			movieDTO.setId(m.getId());
@@ -76,12 +73,12 @@ public class RentalService {
 	}
 
 	public ResponseEntity<Object> deleteRental(Long id) {
-		try { 
+		try {
 			repository.deleteById(id);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			throw new EntityNotFoundException("Rental doesn't exist.");
 		}
-		
+
 		return new ResponseEntity<Object>(HttpStatus.OK);
 	}
 }
