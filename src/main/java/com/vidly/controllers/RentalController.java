@@ -45,6 +45,11 @@ public class RentalController {
 		return service.getMoviesDTO();
 	}
 	
+	@GetMapping("/customersDTO")
+	public List<EntityDTO> getCustomersDTO() {
+		return service.getCustomersDTO();
+	}
+	
 	@PostMapping
 	public Rental rentMovie(@RequestBody Rental rental, @RequestParam Long movieId, @RequestParam Long customerId) {
 		return service.rentMovie(rental, movieId, customerId);
