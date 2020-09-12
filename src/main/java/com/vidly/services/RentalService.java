@@ -75,8 +75,11 @@ public class RentalService {
 	public List<EntityDTO> getCustomersDTO() {
 		List<Customer> customers = customerRepository.findAll();
 		return customers.stream().map(c-> {
-			
-		})
+			EntityDTO movieDTO = new EntityDTO();
+			movieDTO.setName(c.getName());
+			movieDTO.setId(c.getId());
+			return movieDTO;
+		}).collect(Collectors.toList());
 	}
 
 	public ResponseEntity<Object> deleteRental(Long id) {
